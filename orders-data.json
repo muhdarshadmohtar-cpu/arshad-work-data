@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "orderNo": "ORD-001",
+    "deadline": "2026-09-22",
+    "deliveryType": "lalamove",
+    "status": "pending",
+    "notes": "Hubungi En. Ahmad 012-3456789"
+  },
+  {
+    "id": 2,
+    "orderNo": "ORD-002",
+    "deadline": "2026-09-24",
+    "deliveryType": "installation",
+    "status": "pending",
+    "notes": "Pasang di tingkat 2"
+  },
+  {
+    "id": 3,
+    "orderNo": "ORD-003",
+    "deadline": "2026-09-20",
+    "deliveryType": "postage",
+    "status": "completed",
+    "notes": "Dah pos"
+  }
+]
