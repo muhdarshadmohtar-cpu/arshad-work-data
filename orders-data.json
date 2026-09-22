@@ -322,5 +322,14 @@
     "deliveryType": "self-pickup",
     "notes": "",
     "updatedAt": "2026-09-22T15:17:09.584Z"
+  },
+  {
+    "id": 1790090604384,
+    "status": "pending",
+    "orderNo": "26-AUG-236",
+    "deadline": "2026-09-22",
+    "deliveryType": "installation",
+    "notes": "Hold rumah customer tak siap lagi",
+    "updatedAt": "2026-09-22T15:23:24.384Z"
   }
 ]
