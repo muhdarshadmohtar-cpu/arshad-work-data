@@ -37,65 +37,65 @@
   },
   {
     "id": 1790086154000,
-    "status": "pending",
     "orderNo": "26-SEP-102",
     "deadline": "2026-11-01",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:09:14.000Z"
   },
   {
     "id": 1790086369276,
-    "status": "pending",
     "orderNo": "26-SEP-101",
     "deadline": "2026-10-08",
     "deliveryType": "self-pickup",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:12:49.276Z"
   },
   {
     "id": 1790086496473,
-    "status": "pending",
     "orderNo": "26-SEP-90",
     "deadline": "2026-10-09",
     "deliveryType": "lalamove",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:14:56.473Z"
   },
   {
     "id": 1790086563438,
-    "status": "pending",
     "orderNo": "26-SEP-76",
     "deadline": "2026-10-01",
     "deliveryType": "lalamove",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:16:03.438Z"
   },
   {
     "id": 1790086662117,
-    "status": "pending",
     "orderNo": "26-SEP-74",
     "deadline": "2026-10-15",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:17:42.117Z"
   },
   {
     "id": 1790086706982,
-    "status": "pending",
     "orderNo": "26-SEP-68",
     "deadline": "2026-10-30",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:18:26.982Z"
   },
   {
     "id": 1790087339206,
-    "status": "pending",
     "orderNo": "26-SEP-67",
     "deadline": "2026-09-15",
     "deliveryType": "lalamove",
+    "status": "completed",
     "notes": "",
-    "updatedAt": "2026-09-22T14:28:59.206Z"
+    "updatedAt": "2026-09-22T14:29:22.885Z"
   }
 ]
