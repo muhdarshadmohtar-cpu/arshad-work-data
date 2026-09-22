@@ -583,5 +583,14 @@
     "deliveryType": "self-pickup",
     "notes": "",
     "updatedAt": "2026-09-22T15:53:16.523Z"
+  },
+  {
+    "id": 1790092469842,
+    "status": "pending",
+    "orderNo": "26-AUG-106",
+    "deadline": "2026-10-01",
+    "deliveryType": "installation",
+    "notes": "",
+    "updatedAt": "2026-09-22T15:54:29.842Z"
   }
 ]
