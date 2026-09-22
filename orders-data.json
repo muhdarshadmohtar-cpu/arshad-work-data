@@ -100,110 +100,119 @@
   },
   {
     "id": 1790087655488,
-    "status": "pending",
     "orderNo": "26-SEP-65",
     "deadline": "2026-09-27",
     "deliveryType": "self-pickup",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:34:15.485Z"
   },
   {
     "id": 1790087879688,
-    "status": "pending",
     "orderNo": "26-SEP-63",
     "deadline": "2026-10-06",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "Sekali dengan mihrab Hamra (TN2454)(APR368)",
     "updatedAt": "2026-09-22T14:39:02.626Z"
   },
   {
     "id": 1790088012494,
-    "status": "pending",
     "orderNo": "26-SEP-59",
     "deadline": "2026-10-03",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:40:12.493Z"
   },
   {
     "id": 1790088105197,
-    "status": "pending",
     "orderNo": "26-SEP-54",
     "deadline": "2026-09-27",
     "deliveryType": "self-pickup",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:41:45.197Z"
   },
   {
     "id": 1790088250280,
-    "status": "pending",
     "orderNo": "26-SEP-53",
     "deadline": "2027-08-01",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "Nak pickup awal Set Inaya White Edition dulu 1/10/2026",
     "updatedAt": "2026-09-22T14:44:10.280Z"
   },
   {
     "id": 1790088308143,
-    "status": "pending",
     "orderNo": "26-SEP-42",
     "deadline": "2026-09-25",
     "deliveryType": "postage",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:45:08.143Z"
   },
   {
     "id": 1790088376952,
-    "status": "pending",
     "orderNo": "26-SEP-41",
     "deadline": "2026-09-29",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:46:16.952Z"
   },
   {
     "id": 1790088501389,
-    "status": "pending",
     "orderNo": "26-SEP-39",
     "deadline": "2026-11-01",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "KIV lagi",
     "updatedAt": "2026-09-22T14:48:21.389Z"
   },
   {
     "id": 1790089012644,
-    "status": "pending",
     "orderNo": "26-SEP-34",
     "deadline": "2026-09-25",
     "deliveryType": "lalamove",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:56:52.644Z"
   },
   {
     "id": 1790089158365,
-    "status": "pending",
     "orderNo": "26-SEP-28",
     "deadline": "2026-09-05",
     "deliveryType": "self-pickup",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T14:59:18.365Z"
   },
   {
     "id": 1790089238761,
-    "status": "pending",
     "orderNo": "26-SEP-27",
     "deadline": "2026-09-09",
     "deliveryType": "self-pickup",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T15:00:38.761Z"
   },
   {
     "id": 1790089284117,
-    "status": "pending",
     "orderNo": "26-SEP-20",
     "deadline": "2026-10-17",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "",
     "updatedAt": "2026-09-22T15:01:24.117Z"
+  },
+  {
+    "id": 1790089408865,
+    "status": "pending",
+    "orderNo": "26-SEP-15",
+    "deadline": "2026-10-31",
+    "deliveryType": "installation",
+    "notes": "",
+    "updatedAt": "2026-09-22T15:03:28.865Z"
   }
 ]
