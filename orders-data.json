@@ -925,5 +925,14 @@
     "deliveryType": "self-pickup",
     "notes": "",
     "updatedAt": "2026-09-22T16:40:00.118Z"
+  },
+  {
+    "id": 1790095220933,
+    "status": "pending",
+    "orderNo": "26-JUL-86",
+    "deadline": "2026-07-23",
+    "deliveryType": "self-pickup",
+    "notes": "",
+    "updatedAt": "2026-09-22T16:40:20.933Z"
   }
 ]
