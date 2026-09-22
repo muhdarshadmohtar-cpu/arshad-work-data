@@ -133,5 +133,14 @@
     "deliveryType": "self-pickup",
     "notes": "",
     "updatedAt": "2026-09-22T14:41:45.197Z"
+  },
+  {
+    "id": 1790088250280,
+    "status": "pending",
+    "orderNo": "26-SEP-53",
+    "deadline": "2027-08-01",
+    "deliveryType": "installation",
+    "notes": "Nak pickup awal Set Inaya White Edition dulu 1/10/2026",
+    "updatedAt": "2026-09-22T14:44:10.280Z"
   }
 ]
