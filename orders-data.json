@@ -178,5 +178,23 @@
     "deliveryType": "lalamove",
     "notes": "",
     "updatedAt": "2026-09-22T14:56:52.644Z"
+  },
+  {
+    "id": 1790089158365,
+    "status": "pending",
+    "orderNo": "26-SEP-28",
+    "deadline": "2026-09-05",
+    "deliveryType": "self-pickup",
+    "notes": "",
+    "updatedAt": "2026-09-22T14:59:18.365Z"
+  },
+  {
+    "id": 1790089238761,
+    "status": "pending",
+    "orderNo": "26-SEP-27",
+    "deadline": "2026-09-09",
+    "deliveryType": "self-pickup",
+    "notes": "",
+    "updatedAt": "2026-09-22T15:00:38.761Z"
   }
 ]
