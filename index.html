@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f766e">
+  <title>Arshad Work Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f1f5f9;--card:#fff;--text:#0f172a;--accent:#0f766e;--danger:#dc2626;--warn:#ea580c;--muted:#64748b;--sync:#2563eb;--line:#cbd5e1}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Sora,system-ui,sans-serif}
+    button,input,select,textarea{font:inherit}.app{max-width:1120px;margin:auto;padding:20px 16px 40px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+    .brand{display:flex;align-items:center;gap:10px}.brand-icon{width:40px;height:40px;display:grid;place-items:center;border-radius:11px;background:var(--accent);color:#fff;font-size:20px}
+    h1{font-size:20px;line-height:1.1;margin:0;font-weight:700}.sync{margin:4px 0 0;font-size:11px;font-weight:600;color:var(--muted)}
+    .sync.saving{color:var(--sync)}.sync.saved{color:#059669}.sync.error{color:var(--danger)}.sync.disconnected{color:var(--warn)}
+    .actions{display:flex;gap:7px;flex-wrap:wrap}.button{border:1px solid #94a3b8;background:#fff;color:#334155;border-radius:8px;padding:8px 11px;font-size:12px;font-weight:700;cursor:pointer}
+    .button:hover{filter:brightness(.97)}.button.primary{border-color:var(--accent);background:var(--accent);color:#fff}.button.danger{border-color:#fecaca;color:var(--danger);background:#fff}
+    .notice{margin:0 0 14px;border:1px solid #fed7aa;background:#fff7ed;color:#9a3412;border-radius:8px;padding:9px 11px;font-size:11px;line-height:1.5}
+    .metrics{display:grid;grid-template-columns:repeat(4,minmax(110px,1fr));gap:9px;margin-bottom:14px}.metric{border:2px solid var(--text);background:var(--card);padding:9px 11px;border-radius:9px}
+    .metric .label{font-size:10px;font-weight:700;color:var(--muted)}.metric .number{font-size:21px;font-weight:700;margin-top:2px}.metric.pending{border-color:var(--warn);background:#fff7ed}.metric.pending .label,.metric.pending .number{color:var(--warn)}
+    .metric.done{border-color:#059669;background:#ecfdf5}.metric.done .label,.metric.done .number{color:#047857}.metric.urgent{border-color:var(--danger);background:#fef2f2}.metric.urgent .label,.metric.urgent .number{color:var(--danger)}
+    .filter-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin:8px 0}.filter-row.split{justify-content:space-between}.filter-label{font-size:11px;font-weight:700;color:var(--muted)}
+    .filters{display:flex;gap:6px;flex-wrap:wrap}.filter{border:1px solid #94a3b8;border-radius:14px;background:#fff;padding:5px 11px;font-size:11px;font-weight:700;color:#475569;cursor:pointer}.filter.active{background:var(--accent);border-color:var(--accent);color:#fff}
+    .type-filter{border-radius:11px}.type-filter.pickup{background:#f5f3ff;color:#7c3aed;border-color:#ddd6fe}.type-filter.lalamove{background:#fff7ed;color:#ea580c;border-color:#fed7aa}.type-filter.postage{background:#eff6ff;color:#2563eb;border-color:#bfdbfe}.type-filter.installation{background:#ecfdf5;color:#059669;border-color:#a7f3d0}
+    .type-filter.active{color:#fff}.type-filter.active.pickup{background:#7c3aed;border-color:#7c3aed}.type-filter.active.lalamove{background:#ea580c;border-color:#ea580c}.type-filter.active.postage{background:#2563eb;border-color:#2563eb}.type-filter.active.installation{background:#059669;border-color:#059669}
+    .input{width:100%;border:1px solid #94a3b8;border-radius:7px;background:#fff;color:var(--text);padding:9px 10px;font-size:13px}.input:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 2px rgba(15,118,110,.15)}.search{width:230px}
+    .table-wrap{overflow-x:auto;background:#fff;border:2px solid var(--text);border-radius:11px}.orders{width:100%;border-collapse:collapse;font-size:13px;min-width:720px}.orders th{background:var(--text);color:#fff;padding:10px 12px;text-align:left;font-size:11px;white-space:nowrap}.orders th.sortable{cursor:pointer}.orders td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}.orders tr:last-child td{border-bottom:0}.orders tbody tr:hover{background:#f8fafc}.orders .muted{color:#94a3b8}
+    .pill{display:inline-block;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:700;color:#fff}.pill.pickup{background:#7c3aed}.pill.lalamove{background:#ea580c}.pill.postage{background:#2563eb}.pill.installation{background:#059669}
+    .status{border:0;border-radius:12px;padding:4px 10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer}.status.pending{background:#f59e0b}.status.completed{background:#059669}
+    .badge{display:inline-block;margin-left:5px;padding:2px 6px;border-radius:8px;color:#fff;font-size:10px;font-weight:700}.badge.late{background:var(--danger)}.badge.today{background:var(--warn)}.badge.soon{background:#ca8a04}
+    .action-buttons{display:flex;justify-content:center;gap:5px}.icon-button{border:0;background:transparent;font-size:16px;cursor:pointer;padding:3px}.empty{display:none;text-align:center;color:var(--muted);padding:32px 16px;background:#fff;font-size:13px}
+    .modal{display:none;position:fixed;z-index:20;inset:0;padding:16px;background:rgba(15,23,42,.62);align-items:center;justify-content:center}.modal-card{width:min(440px,100%);max-height:92vh;overflow-y:auto;border-radius:13px;background:#fff;padding:20px;box-shadow:0 25px 50px rgba(15,23,42,.3)}
+    .modal-card h2{font-size:18px;margin:0 0 15px}.field{margin-bottom:12px}.field label{display:block;margin-bottom:5px;color:#334155;font-size:11px;font-weight:700}.field textarea{min-height:62px;resize:vertical}.help{font-size:11px;line-height:1.5;color:var(--muted);margin:6px 0 0}.warning{display:none;color:var(--danger);font-weight:700;font-size:11px;margin-top:5px}
+    .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.token-status{border-radius:8px;background:#f8fafc;border:1px solid var(--line);padding:9px 10px;font-size:11px;line-height:1.5;color:#334155}
+    .toast{position:fixed;z-index:30;right:16px;bottom:16px;max-width:min(360px,calc(100vw - 32px));border-radius:8px;background:#0f172a;color:#fff;padding:10px 12px;font-size:12px;line-height:1.4;opacity:0;pointer-events:none;transform:translateY(8px);transition:.2s}.toast.show{opacity:1;transform:none}.toast.error{background:#b91c1c}.toast.success{background:#047857}
+    @media(max-width:620px){.app{padding:16px 11px 30px}.topbar{align-items:flex-start}.actions{width:100%}.actions .button{flex:1;min-width:92px}.metrics{grid-template-columns:repeat(2,1fr)}.filter-row.split{align-items:stretch}.search{width:100%}.orders{font-size:12px}.modal-card{padding:17px}.notice{font-size:10.5px}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon">🚚</div>
+        <div>
+          <h1>ARSHAD WORK ASSISTANT</h1>
+          <p class="sync" id="syncStatus">🔄 Menyambung ke GitHub...</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="button" type="button" id="refreshBtn">🔄 Segar</button>
+        <button class="button" type="button" id="connectBtn">🔑 GitHub</button>
+        <button class="button primary" type="button" id="addBtn">+ Tambah Order</button>
+      </div>
+    </header>
+
+    <p class="notice">⚠️ Repo data ini public. Simpan no. order, tarikh, jenis penghantaran dan nota ringkas sahaja. Jangan simpan nama penuh, nombor telefon atau alamat customer.</p>
+
+    <section class="metrics" id="metricsContainer" aria-label="Ringkasan order"></section>
+
+    <section class="filter-row">
+      <span class="filter-label">Status:</span>
+      <div class="filters" id="statusFilters">
+        <button class="filter active" data-status="all" type="button">Semua</button>
+        <button class="filter" data-status="pending" type="button">Pending</button>
+        <button class="filter" data-status="completed" type="button">Selesai</button>
+        <button class="filter" data-status="urgent" type="button">Mendesak</button>
+      </div>
+    </section>
+
+    <section class="filter-row split">
+      <div class="filters" id="deliveryFilters">
+        <span class="filter-label">Jenis:</span>
+        <button class="filter type-filter active" data-delivery="all" type="button">Semua</button>
+        <button class="filter type-filter pickup" data-delivery="self-pickup" type="button">Pickup</button>
+        <button class="filter type-filter lalamove" data-delivery="lalamove" type="button">Lalamove</button>
+        <button class="filter type-filter postage" data-delivery="postage" type="button">Postage</button>
+        <button class="filter type-filter installation" data-delivery="installation" type="button">Install</button>
+      </div>
+      <input class="input search" id="searchInput" type="search" placeholder="Cari no. order / nota">
+    </section>
+
+    <section class="table-wrap">
+      <table class="orders">
+        <thead>
+          <tr>
+            <th>No. Order</th>
+            <th class="sortable" data-sort="deadline">Tarikh Due <span id="deadlineArrow">▲</span></th>
+            <th class="sortable" data-sort="delivery">Jenis <span id="deliveryArrow"></span></th>
+            <th>Nota</th>
+            <th>Status</th>
+            <th style="text-align:center">Tindakan</th>
+          </tr>
+        </thead>
+        <tbody id="ordersBody"></tbody>
+      </table>
+      <div class="empty" id="emptyState">Tiada order lagi. Tekan <b>+ Tambah Order</b> untuk mula.</div>
+    </section>
+  </main>
+
+  <div class="modal" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+    <div class="modal-card">
+      <h2 id="orderModalTitle">Tambah Order</h2>
+      <form id="orderForm">
+        <input type="hidden" id="orderId">
+        <div class="field">
+          <label for="orderNo">No. Order</label>
+          <input class="input" id="orderNo" autocomplete="off" placeholder="Contoh: 26-SEP-90" required>
+        </div>
+        <div class="field">
+          <label for="deadline">Tarikh Due</label>
+          <input class="input" id="deadline" type="date" required>
+          <div class="warning" id="dateWarning">⚠ Tarikh ini sudah lepas.</div>
+        </div>
+        <div class="field">
+          <label for="deliveryType">Jenis Penghantaran</label>
+          <select class="input" id="deliveryType" required>
+            <option value="self-pickup">Self Pickup</option>
+            <option value="lalamove">Lalamove</option>
+            <option value="postage">Postage</option>
+            <option value="installation">Installation</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="notes">Nota ringkas</label>
+          <textarea class="input" id="notes" placeholder="Contoh: Perlu QC sebelum hantar"></textarea>
+          <p class="help">Jangan masukkan nama, telefon atau alamat customer.</p>
+        </div>
+        <div class="modal-actions">
+          <button class="button" type="button" data-close="orderModal">Batal</button>
+          <button class="button primary" type="submit">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="tokenModal" role="dialog" aria-modal="true" aria-labelledby="tokenModalTitle">
+    <div class="modal-card">
+      <h2 id="tokenModalTitle">Sambung GitHub</h2>
+      <div class="token-status" id="tokenStatus"></div>
+      <form id="tokenForm">
+        <div class="field" style="margin-top:13px">
+          <label for="githubToken">GitHub token baharu</label>
+          <input class="input" id="githubToken" type="password" autocomplete="off" placeholder="Paste token di sini">
+          <p class="help">Buat Fine-grained personal access token untuk repo <b>arshad-work-data</b> sahaja, dengan permission <b>Contents: Read and write</b>. Token ini disimpan dalam browser ini sahaja, bukan dalam website.</p>
+        </div>
+        <div class="modal-actions">
+          <button class="button danger" type="button" id="removeTokenBtn">Buang token</button>
+          <button class="button" type="button" data-close="tokenModal">Tutup</button>
+          <button class="button primary" type="submit">Simpan & Sambung</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    'use strict';
+
+    var GITHUB = {
+      owner: 'muhdarshadmohtar-cpu',
+      repo: 'arshad-work-data',
+      file: 'orders-data.json'
+    };
+    var STORAGE = {
+      token: 'arshad_work_github_token',
+      cache: 'arshad_work_orders_cache'
+    };
+    var DELIVERY = {
+      'self-pickup': { label: 'Pickup', className: 'pickup', order: 1 },
+      lalamove: { label: 'Lalamove', className: 'lalamove', order: 2 },
+      postage: { label: 'Postage', className: 'postage', order: 3 },
+      installation: { label: 'Install', className: 'installation', order: 4 }
+    };
+    var DAYS = ['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu'];
+    var orders = [];
+    var fileSha = null;
+    var accessToken = localStorage.getItem(STORAGE.token) || '';
+    var statusFilter = 'all';
+    var deliveryFilter = 'all';
+    var searchTerm = '';
+    var sortField = 'deadline';
+    var sortAscending = true;
+    var isSyncing = false;
+    var toastTimer = null;
+
+    var ordersBody = document.getElementById('ordersBody');
+    var emptyState = document.getElementById('emptyState');
+    var syncStatus = document.getElementById('syncStatus');
+    var toast = document.getElementById('toast');
+    var orderModal = document.getElementById('orderModal');
+    var tokenModal = document.getElementById('tokenModal');
+    var orderForm = document.getElementById('orderForm');
+    var tokenForm = document.getElementById('tokenForm');
+
+    function apiUrl() {
+      return 'https://api.github.com/repos/' + GITHUB.owner + '/' + GITHUB.repo + '/contents/' + GITHUB.file;
+    }
+
+    function headers(includeJson) {
+      var result = {
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      };
+      if (accessToken) result.Authorization = 'Bearer ' + accessToken;
+      if (includeJson) result['Content-Type'] = 'application/json';
+      return result;
+    }
+
+    function setSync(state, message) {
+      syncStatus.className = 'sync ' + state;
+      syncStatus.textContent = message;
+    }
+
+    function showToast(message, kind) {
+      clearTimeout(toastTimer);
+      toast.textContent = message;
+      toast.className = 'toast show ' + (kind || '');
+      toastTimer = setTimeout(function() {
+        toast.className = 'toast';
+      }, 3600);
+    }
+
+    function parseLocalDate(value) {
+      var parts = String(value || '').split('-').map(Number);
+      if (parts.length !== 3 || !parts[0] || !parts[1] || !parts[2]) return null;
+      return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+
+    function isoDate(date) {
+      var year = date.getFullYear();
+      var month = String(date.getMonth() + 1).padStart(2, '0');
+      var day = String(date.getDate()).padStart(2, '0');
+      return year + '-' + month + '-' + day;
+    }
+
+    function addDays(date, days) {
+      var result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+
+    function getDaysRemaining(value) {
+      var due = parseLocalDate(value);
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (!due) return 9999;
+      due.setHours(0, 0, 0, 0);
+      return Math.round((due.getTime() - today.getTime()) / 86400000);
+    }
+
+    function formatDate(value) {
+      var date = parseLocalDate(value);
+      if (!date) return '—';
+      return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + DAYS[date.getDay()];
+    }
+
+    function escapeHtml(value) {
+      return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function decodeBase64(value) {
+      var bytes = Uint8Array.from(atob(String(value || '').replace(/\n/g, '')), function(char) {
+        return char.charCodeAt(0);
+      });
+      return new TextDecoder().decode(bytes);
+    }
+
+    function encodeBase64(value) {
+      var bytes = new TextEncoder().encode(value);
+      var binary = '';
+      bytes.forEach(function(byte) {
+        binary += String.fromCharCode(byte);
+      });
+      return btoa(binary);
+    }
+
+    function normalizeOrders(source) {
+      if (!Array.isArray(source)) return [];
+      return source.map(function(item, index) {
+        var type = DELIVERY[item.deliveryType] ? item.deliveryType : 'self-pickup';
+        var status = item.status === 'completed' ? 'completed' : 'pending';
+        var id = Number(item.id);
+        return {
+          id: Number.isFinite(id) ? id : Date.now() + index,
+          orderNo: String(item.orderNo || '').trim(),
+          deadline: parseLocalDate(item.deadline) ? item.deadline : isoDate(new Date()),
+          deliveryType: type,
+          status: status,
+          notes: String(item.notes || '').trim(),
+          updatedAt: String(item.updatedAt || '')
+        };
+      }).filter(function(item) {
+        return item.orderNo;
+      });
+    }
+
+    function saveCache() {
+      localStorage.setItem(STORAGE.cache, JSON.stringify(orders));
+    }
+
+    function loadCache() {
+      try {
+        var cached = JSON.parse(localStorage.getItem(STORAGE.cache) || '[]');
+        orders = normalizeOrders(cached);
+      } catch (error) {
+        orders = [];
+      }
+    }
+
+    async function fetchRemote() {
+      var response = await fetch(apiUrl(), { headers: headers(false) });
+      if (response.status === 404) return { orders: [], sha: null };
+      if (!response.ok) {
+        var error = new Error('GitHub ralat ' + response.status);
+        error.status = response.status;
+        throw error;
+      }
+      var data = await response.json();
+      return {
+        orders: normalizeOrders(JSON.parse(decodeBase64(data.content))),
+        sha: data.sha
+      };
+    }
+
+    async function pullFromGitHub() {
+      setSync('saving', '🔄 Sedang ambil data dari GitHub...');
+      try {
+        var remote = await fetchRemote();
+        orders = remote.orders;
+        fileSha = remote.sha;
+        saveCache();
+        renderAll();
+        setSync(accessToken ? 'saved' : 'disconnected', accessToken ? '✓ Tersambung ke GitHub' : '✓ Data dibuka · Sambung GitHub untuk edit');
+      } catch (error) {
+        renderAll();
+        setSync('error', '⚠ Tidak dapat ambil data');
+        showToast('Internet bermasalah atau GitHub tidak dapat dicapai. Data terakhir dalam telefon masih dipaparkan.', 'error');
+      }
+    }
+
+    function requireToken() {
+      if (accessToken) return true;
+      openTokenModal();
+      showToast('Sambungkan GitHub dahulu untuk ubah atau simpan order.', 'error');
+      return false;
+    }
+
+    async function saveToGitHub() {
+      if (isSyncing || !accessToken) return false;
+      isSyncing = true;
+      setSync('saving', '🔄 Sedang simpan ke GitHub...');
+      try {
+        var body = {
+          message: 'Update order ' + new Date().toLocaleString('ms-MY'),
+          content: encodeBase64(JSON.stringify(orders, null, 2))
+        };
+        if (fileSha) body.sha = fileSha;
+        var response = await fetch(apiUrl(), {
+          method: 'PUT',
+          headers: headers(true),
+          body: JSON.stringify(body)
+        });
+        if (!response.ok) {
+          var error = new Error('GitHub ralat ' + response.status);
+          error.status = response.status;
+          throw error;
+        }
+        var data = await response.json();
+        fileSha = data.content.sha;
+        setSync('saved', '✓ Disimpan ke GitHub');
+        showToast('Order berjaya disimpan dan diselaraskan.', 'success');
+        return true;
+      } catch (error) {
+        if (error.status === 409 || error.status === 422) {
+          setSync('error', '⚠ Ada kemas kini dari tab lain');
+          showToast('Ada perubahan dari tab/telefon lain. Tekan Segar dahulu, kemudian buat semula perubahan itu.', 'error');
+        } else if (error.status === 401 || error.status === 403) {
+          setSync('error', '⚠ Token GitHub tidak sah');
+          showToast('Token GitHub tidak sah atau sudah tamat. Sambungkan token baharu.', 'error');
+          openTokenModal();
+        } else {
+          setSync('error', '⚠ Gagal simpan ke GitHub');
+          showToast('Perubahan masih disimpan dalam telefon. Cuba tekan Segar bila internet stabil.', 'error');
+        }
+        return false;
+      } finally {
+        isSyncing = false;
+      }
+    }
+
+    function renderMetrics() {
+      var total = orders.length;
+      var pending = orders.filter(function(order) { return order.status === 'pending'; }).length;
+      var completed = orders.filter(function(order) { return order.status === 'completed'; }).length;
+      var overdue = orders.filter(function(order) {
+        return order.status !== 'completed' && getDaysRemaining(order.deadline) < 0;
+      }).length;
+      var soon = orders.filter(function(order) {
+        var remaining = getDaysRemaining(order.deadline);
+        return order.status !== 'completed' && remaining >= 0 && remaining <= 2;
+      }).length;
+      var urgentLabel = overdue ? 'Lewat' : 'Mendesak';
+      var urgentValue = overdue || soon;
+      document.getElementById('metricsContainer').innerHTML =
+        '<div class="metric"><div class="label">Jumlah</div><div class="number">' + total + '</div></div>' +
+        '<div class="metric pending"><div class="label">Pending</div><div class="number">' + pending + '</div></div>' +
+        '<div class="metric done"><div class="label">Selesai</div><div class="number">' + completed + '</div></div>' +
+        '<div class="metric urgent"><div class="label">' + urgentLabel + '</div><div class="number">' + urgentValue + '</div></div>';
+    }
+
+    function getVisibleOrders() {
+      var result = orders.slice();
+      if (statusFilter === 'urgent') {
+        result = result.filter(function(order) {
+          return order.status !== 'completed' && getDaysRemaining(order.deadline) <= 2;
+        });
+      } else if (statusFilter !== 'all') {
+        result = result.filter(function(order) { return order.status === statusFilter; });
+      }
+      if (deliveryFilter !== 'all') {
+        result = result.filter(function(order) { return order.deliveryType === deliveryFilter; });
+      }
+      if (searchTerm) {
+        result = result.filter(function(order) {
+          return order.orderNo.toLowerCase().includes(searchTerm) || order.notes.toLowerCase().includes(searchTerm);
+        });
+      }
+      result.sort(function(a, b) {
+        if (a.status !== b.status) return a.status === 'pending' ? -1 : 1;
+        var compare = 0;
+        if (sortField === 'delivery') {
+          compare = DELIVERY[a.deliveryType].order - DELIVERY[b.deliveryType].order;
+        } else {
+          compare = parseLocalDate(a.deadline).getTime() - parseLocalDate(b.deadline).getTime();
+        }
+        return sortAscending ? compare : -compare;
+      });
+      return result;
+    }
+
+    function urgencyHtml(order) {
+      if (order.status === 'completed') return '';
+      var remaining = getDaysRemaining(order.deadline);
+      if (remaining < 0) return ' <span class="badge late">LEWAT ' + Math.abs(remaining) + 'H</span>';
+      if (remaining === 0) return ' <span class="badge today">HARI INI</span>';
+      if (remaining <= 2) return ' <span class="badge soon">SEGERA</span>';
+      return '';
+    }
+
+    function renderOrders() {
+      var visible = getVisibleOrders();
+      emptyState.style.display = visible.length ? 'none' : 'block';
+      if (!visible.length) {
+        ordersBody.innerHTML = '';
+        return;
+      }
+      ordersBody.innerHTML = visible.map(function(order) {
+        var delivery = DELIVERY[order.deliveryType];
+        var isDone = order.status === 'completed';
+        var notes = order.notes ? escapeHtml(order.notes) : '<span class="muted">—</span>';
+        return '<tr>' +
+          '<td><b>' + escapeHtml(order.orderNo) + '</b></td>' +
+          '<td>' + formatDate(order.deadline) + urgencyHtml(order) + '</td>' +
+          '<td><span class="pill ' + delivery.className + '">' + delivery.label + '</span></td>' +
+          '<td style="max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + notes + '</td>' +
+          '<td><button class="status ' + order.status + '" type="button" data-action="status" data-id="' + order.id + '">' + (isDone ? '✓ Selesai' : 'Pending') + '</button></td>' +
+          '<td><div class="action-buttons"><button class="icon-button" type="button" data-action="edit" data-id="' + order.id + '" aria-label="Edit order">✏️</button><button class="icon-button" type="button" data-action="delete" data-id="' + order.id + '" aria-label="Padam order">🗑️</button></div></td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    function updateSortArrows() {
+      document.getElementById('deadlineArrow').textContent = sortField === 'deadline' ? (sortAscending ? '▲' : '▼') : '';
+      document.getElementById('deliveryArrow').textContent = sortField === 'delivery' ? (sortAscending ? '▲' : '▼') : '';
+    }
+
+    function renderAll() {
+      renderMetrics();
+      renderOrders();
+      updateSortArrows();
+    }
+
+    function openModal(modal) {
+      modal.style.display = 'flex';
+    }
+
+    function closeModal(modal) {
+      modal.style.display = 'none';
+    }
+
+    function openOrderModal(order) {
+      orderForm.reset();
+      document.getElementById('dateWarning').style.display = 'none';
+      document.getElementById('orderId').value = '';
+      document.getElementById('deadline').value = isoDate(addDays(new Date(), 2));
+      document.getElementById('orderModalTitle').textContent = 'Tambah Order';
+      if (order) {
+        document.getElementById('orderModalTitle').textContent = 'Edit Order';
+        document.getElementById('orderId').value = order.id;
+        document.getElementById('orderNo').value = order.orderNo;
+        document.getElementById('deadline').value = order.deadline;
+        document.getElementById('deliveryType').value = order.deliveryType;
+        document.getElementById('notes').value = order.notes;
+        checkDateWarning();
+      }
+      openModal(orderModal);
+      setTimeout(function() { document.getElementById('orderNo').focus(); }, 20);
+    }
+
+    function openTokenModal() {
+      document.getElementById('githubToken').value = '';
+      document.getElementById('tokenStatus').innerHTML = accessToken ?
+        '✅ GitHub sudah disambungkan pada browser ini. Token tidak dipaparkan untuk keselamatan.' :
+        'ℹ️ Belum ada token pada browser ini. Data masih boleh dilihat, tetapi hanya token membolehkan simpanan ke GitHub.';
+      openModal(tokenModal);
+    }
+
+    function checkDateWarning() {
+      var value = document.getElementById('deadline').value;
+      var warning = document.getElementById('dateWarning');
+      warning.style.display = value && getDaysRemaining(value) < 0 ? 'block' : 'none';
+    }
+
+    async function changeStatus(id) {
+      if (!requireToken()) return;
+      var order = orders.find(function(item) { return item.id === id; });
+      if (!order) return;
+      order.status = order.status === 'completed' ? 'pending' : 'completed';
+      order.updatedAt = new Date().toISOString();
+      saveCache();
+      renderAll();
+      await saveToGitHub();
+    }
+
+    async function deleteOrder(id) {
+      if (!requireToken()) return;
+      var order = orders.find(function(item) { return item.id === id; });
+      if (!order || !confirm('Padam order ' + order.orderNo + '?')) return;
+      orders = orders.filter(function(item) { return item.id !== id; });
+      saveCache();
+      renderAll();
+      await saveToGitHub();
+    }
+
+    document.getElementById('refreshBtn').addEventListener('click', pullFromGitHub);
+    document.getElementById('connectBtn').addEventListener('click', openTokenModal);
+    document.getElementById('addBtn').addEventListener('click', function() {
+      if (requireToken()) openOrderModal();
+    });
+    document.getElementById('deadline').addEventListener('change', checkDateWarning);
+    document.getElementById('searchInput').addEventListener('input', function(event) {
+      searchTerm = event.target.value.trim().toLowerCase();
+      renderOrders();
+    });
+
+    document.getElementById('statusFilters').addEventListener('click', function(event) {
+      var button = event.target.closest('[data-status]');
+      if (!button) return;
+      statusFilter = button.dataset.status;
+      document.querySelectorAll('[data-status]').forEach(function(item) { item.classList.toggle('active', item === button); });
+      renderOrders();
+    });
+
+    document.getElementById('deliveryFilters').addEventListener('click', function(event) {
+      var button = event.target.closest('[data-delivery]');
+      if (!button) return;
+      deliveryFilter = button.dataset.delivery;
+      document.querySelectorAll('[data-delivery]').forEach(function(item) { item.classList.toggle('active', item === button); });
+      renderOrders();
+    });
+
+    document.querySelectorAll('.sortable').forEach(function(header) {
+      header.addEventListener('click', function() {
+        var field = header.dataset.sort;
+        if (sortField === field) sortAscending = !sortAscending;
+        else {
+          sortField = field;
+          sortAscending = true;
+        }
+        renderOrders();
+        updateSortArrows();
+      });
+    });
+
+    ordersBody.addEventListener('click', function(event) {
+      var button = event.target.closest('[data-action]');
+      if (!button) return;
+      var id = Number(button.dataset.id);
+      if (button.dataset.action === 'status') changeStatus(id);
+      if (button.dataset.action === 'edit') {
+        if (!requireToken()) return;
+        var order = orders.find(function(item) { return item.id === id; });
+        if (order) openOrderModal(order);
+      }
+      if (button.dataset.action === 'delete') deleteOrder(id);
+    });
+
+    orderForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      if (!requireToken()) return;
+      var id = Number(document.getElementById('orderId').value);
+      var data = {
+        orderNo: document.getElementById('orderNo').value.trim().toUpperCase(),
+        deadline: document.getElementById('deadline').value,
+        deliveryType: document.getElementById('deliveryType').value,
+        notes: document.getElementById('notes').value.trim(),
+        updatedAt: new Date().toISOString()
+      };
+      var duplicate = orders.find(function(order) {
+        return order.orderNo.toLowerCase() === data.orderNo.toLowerCase() && order.id !== id;
+      });
+      if (duplicate && !confirm('No. order ini sudah ada. Simpan juga?')) return;
+      if (id) {
+        var index = orders.findIndex(function(order) { return order.id === id; });
+        if (index >= 0) orders[index] = Object.assign({}, orders[index], data);
+      } else {
+        orders.push(Object.assign({ id: Date.now(), status: 'pending' }, data));
+      }
+      saveCache();
+      closeModal(orderModal);
+      renderAll();
+      await saveToGitHub();
+    });
+
+    tokenForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      var token = document.getElementById('githubToken').value.trim();
+      if (!token) {
+        showToast('Masukkan token GitHub dahulu.', 'error');
+        return;
+      }
+      accessToken = token;
+      localStorage.setItem(STORAGE.token, token);
+      closeModal(tokenModal);
+      await pullFromGitHub();
+    });
+
+    document.getElementById('removeTokenBtn').addEventListener('click', function() {
+      accessToken = '';
+      localStorage.removeItem(STORAGE.token);
+      closeModal(tokenModal);
+      setSync('disconnected', '✓ Data dibuka · Sambung GitHub untuk edit');
+      showToast('Token sudah dibuang daripada browser ini.', 'success');
+    });
+
+    document.querySelectorAll('[data-close]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        closeModal(document.getElementById(button.dataset.close));
+      });
+    });
+
+    [orderModal, tokenModal].forEach(function(modal) {
+      modal.addEventListener('click', function(event) {
+        if (event.target === modal) closeModal(modal);
+      });
+    });
+
+    window.addEventListener('storage', function(event) {
+      if (event.key === STORAGE.cache && event.newValue) {
+        try {
+          orders = normalizeOrders(JSON.parse(event.newValue));
+          renderAll();
+        } catch (error) {}
+      }
+    });
+
+    loadCache();
+    renderAll();
+    pullFromGitHub();
+  </script>
+</body>
+</html>
