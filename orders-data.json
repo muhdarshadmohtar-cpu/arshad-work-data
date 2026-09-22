@@ -1045,11 +1045,11 @@
   },
   {
     "id": 1790095534280,
-    "status": "pending",
+    "status": "completed",
     "orderNo": "26-JUL-05",
     "deadline": "2026-07-03",
     "deliveryType": "self-pickup",
     "notes": "",
-    "updatedAt": "2026-09-22T16:45:34.279Z"
+    "updatedAt": "2026-09-22T16:49:31.129Z"
   }
 ]
