@@ -556,5 +556,14 @@
     "deliveryType": "installation",
     "notes": "",
     "updatedAt": "2026-09-22T15:51:20.665Z"
+  },
+  {
+    "id": 1790092313848,
+    "status": "pending",
+    "orderNo": "26-AUG-110",
+    "deadline": "2026-08-14",
+    "deliveryType": "lalamove",
+    "notes": "",
+    "updatedAt": "2026-09-22T15:51:53.847Z"
   }
 ]
