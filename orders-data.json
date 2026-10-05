@@ -1096,5 +1096,14 @@
     "deliveryType": "installation",
     "notes": "Pemasangan customer maybe first week tunggu ruangan siap",
     "updatedAt": "2026-10-05T08:11:39.443Z"
+  },
+  {
+    "id": 1791187975435,
+    "status": "pending",
+    "orderNo": "26-OCT-21",
+    "deadline": "2026-10-22",
+    "deliveryType": "self-pickup",
+    "notes": "Kalau tak jadi self pickup lalamove, bulan 11 ada majlis kenduri",
+    "updatedAt": "2026-10-05T08:12:55.435Z"
   }
 ]
