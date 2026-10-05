@@ -1072,38 +1072,47 @@
   },
   {
     "id": 1791187481454,
-    "status": "pending",
     "orderNo": "26-OCT-02",
     "deadline": "2026-11-16",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "Customer ambil purnama tukar dari mermaid",
     "updatedAt": "2026-10-05T08:04:41.452Z"
   },
   {
     "id": 1791187711888,
-    "status": "pending",
     "orderNo": "26-OCT-06",
     "deadline": "2026-10-22",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "Sekali dengan 26-sep-76",
     "updatedAt": "2026-10-05T08:08:31.884Z"
   },
   {
     "id": 1791187882461,
-    "status": "pending",
     "orderNo": "26-OCT-11",
     "deadline": "2026-11-01",
     "deliveryType": "installation",
+    "status": "pending",
     "notes": "Pemasangan customer maybe first week tunggu ruangan siap",
     "updatedAt": "2026-10-05T08:11:39.443Z"
   },
   {
     "id": 1791187975435,
-    "status": "pending",
     "orderNo": "26-OCT-21",
     "deadline": "2026-10-22",
     "deliveryType": "self-pickup",
+    "status": "pending",
     "notes": "Kalau tak jadi self pickup lalamove, bulan 11 ada majlis kenduri",
     "updatedAt": "2026-10-05T08:12:55.435Z"
+  },
+  {
+    "id": 1791188101754,
+    "status": "pending",
+    "orderNo": "26-OCT-22",
+    "deadline": "2027-01-01",
+    "deliveryType": "self-pickup",
+    "notes": "Customer dari Singapore maybe akan pickup pakai sareena bulan januari sebab sekarang outstation ke mekah",
+    "updatedAt": "2026-10-05T08:15:01.753Z"
   }
 ]
