@@ -705,10 +705,10 @@
     "id": 1790094241413,
     "orderNo": "26-AUG-55",
     "deadline": "2026-08-21",
-    "deliveryType": "self-pickup",
+    "deliveryType": "lalamove",
     "status": "pending",
-    "notes": "",
-    "updatedAt": "2026-09-22T16:24:01.413Z"
+    "notes": "Dah wasap",
+    "updatedAt": "2026-10-06T04:35:11.790Z"
   },
   {
     "id": 1790094311368,
